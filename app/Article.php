@@ -3,9 +3,18 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Cviebrock\EloquentSluggable\SluggableInterface;
+use Cviebrock\EloquentSluggable\SluggableTrait;
 
 class Article extends Model
 {
+    use SluggableTrait;
+
+    protected $sluggable = [
+        'build_from' => 'title',
+        'save_to' => 'slug',
+    ];
+
     protected $table = 'articles';
     protected $fillable = ['title','content','user_id','category_id'];
 

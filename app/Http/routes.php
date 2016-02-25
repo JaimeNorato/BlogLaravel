@@ -15,11 +15,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::group(['prefix' => 'articles'], function(){
-	Route::get('view/{id}',[
-			'uses' => 'TestController@view',
-			 'as' => 'articlesView'	
-		]);
+Route::group(['prefix' => 'admin'], function(){
+	Route::resource('users','UserController');
+    Route::get('users/{id}/destroy',[
+        'uses' => 'UserController@destroy',
+        'as' => 'admin.users.destroy'
+    ]);
 });
 
 /*
