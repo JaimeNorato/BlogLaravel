@@ -16,11 +16,15 @@ Route::get('/', function () {
 });
 
 Route::group(['prefix' => 'admin'], function(){
+    //rutas del usuario
 	Route::resource('users','UserController');
     Route::get('users/{id}/destroy',[
         'uses' => 'UserController@destroy',
         'as' => 'admin.users.destroy'
     ]);
+    //rutas de la categoria
+    Route::resource('categories','CategoryController');
+
 });
 
 /*

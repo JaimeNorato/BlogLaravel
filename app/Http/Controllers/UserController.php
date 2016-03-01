@@ -30,9 +30,11 @@ class UserController extends Controller
     }
     public function update(Request $request,$id){
         $user = User::find($id);
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->type = $request->type;
+        //este metodo remplaza a las lineas siquientes que estan comentadas y hace lo mismo, haciendo mas rapida la actualizacion
+        $user->fill($request->all());
+        //$user->name = $request->name;
+        //$user->email = $request->email;
+        //$user->type = $request->type;
         $user->save();
         Flash::warning("El usuario ".$user->name." se ha editado de forma exitosa");
         return redirect()->route('admin.users.index');
