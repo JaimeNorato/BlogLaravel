@@ -66,7 +66,8 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $category = Category::find($id);
+        return view('admin.categories.edit')->with('category',$category);
     }
 
     /**
@@ -76,9 +77,13 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CategoryRequest $request, $id)
     {
-        //
+        $category = Category::find($id);
+        $category->fill($request->all());
+        $category->save();
+        Flash::warning("La categoria ".$category->name." se ha editado de forma exitosa");
+        return redirect()->route('admin.categories.index');
     }
 
     /**
@@ -89,6 +94,9 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $category = Category::find($id);
+        $category->delete();
+        Flash::error('La categoria '.$category->name.' se a eliminado de forma exitosa');
+        return redirect()->route('admin.categories.index');
     }
 }
