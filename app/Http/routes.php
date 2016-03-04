@@ -34,6 +34,13 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function(){
         'as' => 'admin.categories.destroy'
     ]);
 
+    //rutas de los tags
+    Route::resource('tags','TagController');
+    Route::get('tags/{id}/destroy',[
+        'uses' => 'TagController@destroy',
+        'as' => 'admin.tags.destroy'
+    ]);
+
 });
 
 Route::get('admin/auth/login',[
